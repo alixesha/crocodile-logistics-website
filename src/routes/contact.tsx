@@ -1,3 +1,4 @@
+import { Header } from "../components/Header";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 
@@ -42,7 +43,9 @@ window.location.href =
 }
 
 return (
-<main className="cl-page">
+  <>
+    <Header />
+    <main className="cl-page">
 <section className="cl-page-hero">
 <div className="cl-container">
 <span className="cl-eyebrow">CONTACT CROCODILE LOGISTICS</span>
@@ -238,7 +241,7 @@ return (
       </Link>
     </div>
   </section>
-</main>
-
-);
+    </main>
+  </>
+  );
 }

@@ -1,234 +1,276 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 
+const PHONE = "+15013513623";
+
 export const Route = createFileRoute("/")({
-component: Index,
+component: HomePage,
 });
 
-const PHONE = "501-351-3623";
-const PHONE_LINK = "tel:+15013513623";
-
-const services = [
-{
-number: "01",
-title: "Trucking",
-description:
-"Dependable trucking solutions built around your schedule, your cargo, and the demands of the road.",
-icon: "↗",
-},
-{
-number: "02",
-title: "Hauling",
-description:
-"Reliable hauling support focused on moving materials efficiently and keeping your operation moving.",
-icon: "⇢",
-},
-{
-number: "03",
-title: "Construction Logistics",
-description:
-"Practical transportation and logistics support to help construction projects stay organized and on track.",
-icon: "⌁",
-},
-];
-
-function Index() {
+function HomePage() {
 const [menuOpen, setMenuOpen] = useState(false);
-const [form, setForm] = useState({
-name: "",
-phone: "",
-service: "Trucking",
-message: "",
-});
 
-function submitRequest(e: React.FormEvent<HTMLFormElement>) {
-e.preventDefault();
-
-const message = [
-  "Hello Crocodile Logistics, I would like to request information.",
-  "",
-  `Name: ${form.name}`,
-  `Phone: ${form.phone}`,
-  `Service: ${form.service}`,
-  `Details: ${form.message || "Please contact me to discuss."}`,
-].join("\n");
-
-window.location.href = `sms:+15013513623?body=${encodeURIComponent(message)}`;
-
-}
+const closeMenu = () => setMenuOpen(false);
 
 return (
 <main className="cl-site">
 <div className="cl-topbar">
 <div className="cl-container cl-topbar-inner">
-<span>RELIABLE SERVICE. REAL-WORLD SOLUTIONS.</span>
+<span>ARKANSAS, USA · TRUCKING & LOGISTICS</span>
 <span className="cl-top-hours">
-<span className="cl-status-dot" /> MON–SAT · 8AM–5PM
+<i className="cl-status-dot" />
+MON–SAT · 8:00 AM–5:00 PM
 </span>
 </div>
 </div>
 
   <header className="cl-header">
     <div className="cl-container cl-nav">
-      <a href="#home" className="cl-brand" aria-label="Crocodile Logistics home">
-        <span className="cl-logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 64 64" fill="none">
+      <Link to="/" className="cl-brand" onClick={closeMenu}>
+        <span className="cl-logo-mark">
+          <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
             <path
-              d="M8 22 24 8h25l7 9-9 8H28l-8 9H8l7-8-7-4Z"
+              d="M8 9H40V17H18V23H36V31H18V39H8V9Z"
               fill="currentColor"
             />
             <path
-              d="m13 40 10-8h24l8 7-8 8H27l-8 8H8l7-8-2-7Z"
-              fill="currentColor"
-              opacity=".65"
+              d="M23 17L40 24L23 31"
+              stroke="currentColor"
+              strokeWidth="4"
             />
-            <path d="M39 15h7M34 40h7" stroke="#10150D" strokeWidth="3" />
           </svg>
         </span>
         <span className="cl-brand-copy">
           <strong>CROCODILE</strong>
           <small>LOGISTICS, LLLC</small>
         </span>
-      </a>
+      </Link>
 
       <button
-        type="button"
         className="cl-menu-toggle"
-        aria-label={menuOpen ? "Close menu" : "Open menu"}
+        type="button"
+        aria-label={menuOpen ? "Close navigation" : "Open navigation"}
         aria-expanded={menuOpen}
         onClick={() => setMenuOpen(!menuOpen)}
       >
-        {menuOpen ? "✕" : "☰"}
+        {menuOpen ? "×" : "☰"}
       </button>
 
       <nav className={`cl-links ${menuOpen ? "cl-links-open" : ""}`}>
-        
-<Link to="/about" onClick={() => setMenuOpen(false)}>ABOUT US</Link>
-<Link to="/services" onClick={() => setMenuOpen(false)}>SERVICES</Link>
-<Link to="/industries" onClick={() => setMenuOpen(false)}>INDUSTRIES</Link>
-<Link to="/contact" onClick={() => setMenuOpen(false)}>CONTACT</Link>
-        <a className="cl-nav-call" href={PHONE_LINK}>
+        <Link to="/" onClick={closeMenu}>HOME</Link>
+        <Link to="/about" onClick={closeMenu}>ABOUT US</Link>
+        <Link to="/services" onClick={closeMenu}>SERVICES</Link>
+        <Link to="/industries" onClick={closeMenu}>INDUSTRIES</Link>
+        <Link to="/contact" onClick={closeMenu}>CONTACT</Link>
+        <a className="cl-nav-call" href={`tel:${PHONE}`}>
           CALL NOW <span>↗</span>
         </a>
       </nav>
     </div>
   </header>
 
-  <section className="cl-hero" id="home">
+  <section className="cl-hero">
     <div className="cl-hero-image" />
     <div className="cl-hero-shade" />
+
     <div className="cl-container cl-hero-content">
-      <div className="cl-eyebrow cl-hero-eyebrow">
+      <div className="cl-eyebrow">
         <span className="cl-eyebrow-line" />
-        ARKANSAS · LOGISTICS & TRANSPORTATION
+        BUILT ON RELIABILITY. DRIVEN BY RESULTS.
       </div>
+
       <h1>
-        POWERING
+        WE MOVE
         <br />
-        THE ROAD<span className="cl-lime">.</span>
+        <span className="cl-lime">WHAT</span> MOVES
         <br />
-        MOVING
-        <br />
-        <span className="cl-outline-text">INDUSTRY.</span>
+        <span className="cl-outline-text">YOU FORWARD.</span>
       </h1>
+
       <p className="cl-hero-description">
-        Transportation and hauling solutions that help businesses keep
-        moving. Dependable service, practical support, and a team ready
-        to get to work.
+        Dependable trucking, hauling, and construction logistics support
+        to help keep your operation moving. Professional service.
+        Straightforward communication. A team focused on your next move.
       </p>
+
       <div className="cl-hero-actions">
-        <a href="#contact" className="cl-button cl-button-lime">
-          DISCUSS YOUR PROJECT <span>↗</span>
-        </a>
-        <a href={PHONE_LINK} className="cl-button cl-button-outline">
-          <span className="cl-phone-icon">↗</span> {PHONE}
-        </a>
-      </div>
-      <div className="cl-hero-bottom">
-        <span><i /> BUILT FOR THE LONG HAUL</span>
-        <a href="#about">SCROLL TO EXPLORE ↓</a>
+        <Link to="/services" className="cl-button cl-button-lime">
+          EXPLORE OUR SERVICES <span>↗</span>
+        </Link>
+        <Link to="/contact" className="cl-button cl-button-outline">
+          REQUEST INFORMATION <span>→</span>
+        </Link>
       </div>
     </div>
-    <div className="cl-hero-side-label">CROCODILE LOGISTICS · ARKANSAS</div>
+
+    <div className="cl-hero-bottom">
+      <span><i /> SERVING ARKANSAS, USA</span>
+      <a href={`tel:${PHONE}`}>CALL {PHONE.replace("+1", "")}</a>
+      <span>DEPENDABLE BY DESIGN ↘</span>
+    </div>
+
+    <div className="cl-hero-side-label">
+      TRUCKING · HAULING · LOGISTICS
+    </div>
   </section>
 
   <section className="cl-trust-strip">
     <div className="cl-container cl-trust-grid">
-      <div><strong>01</strong><span>DEPENDABLE<br />TRANSPORTATION</span></div>
-      <div><strong>02</strong><span>PRACTICAL<br />HAULING SOLUTIONS</span></div>
-      <div><strong>03</strong><span>PROJECT-FOCUSED<br />LOGISTICS SUPPORT</span></div>
-      <div><strong>04</strong><span>PERSONAL<br />SERVICE</span></div>
+      <div>
+        <strong>01</strong>
+        <span>DEPENDABLE<br />SERVICE</span>
+      </div>
+      <div>
+        <strong>02</strong>
+        <span>PROJECT-FOCUSED<br />SUPPORT</span>
+      </div>
+      <div>
+        <strong>03</strong>
+        <span>DIRECT<br />COMMUNICATION</span>
+      </div>
+      <div>
+        <strong>04</strong>
+        <span>ARKANSAS<br />BASED</span>
+      </div>
     </div>
   </section>
 
-  <section className="cl-section cl-about" id="about">
+  <section className="cl-section cl-about">
     <div className="cl-container cl-about-grid">
       <div className="cl-about-visual">
         <div className="cl-about-image" />
         <div className="cl-image-stamp">
           <span>CL</span>
-          <small>READY FOR<br />THE ROAD</small>
+          <small>LOGISTICS<br />IN MOTION</small>
         </div>
-        <div className="cl-image-caption">BUILT ON RELIABILITY. DRIVEN BY SERVICE.</div>
+        <div className="cl-image-caption">
+          CROCODILE LOGISTICS, LLLC · ARKANSAS
+        </div>
       </div>
+
       <div className="cl-about-copy">
-        <div className="cl-eyebrow"><span className="cl-eyebrow-line" /> WHO WE ARE</div>
-        <h2>MORE THAN<br />MOVING <span className="cl-lime">MATERIAL.</span></h2>
+        <div className="cl-eyebrow">
+          <span className="cl-eyebrow-line" />
+          WHO WE ARE
+        </div>
+        <h2>
+          MORE THAN
+          <br />
+          <span className="cl-lime">GETTING</span>
+          <br />
+          THERE.
+        </h2>
         <p>
-          At Crocodile Logistics, we understand that every delivery,
-          every load, and every project matters. Our focus is on providing
-          reliable transportation and hauling support with straightforward
-          communication and a commitment to service.
+          Logistics is about more than moving from one place to another.
+          It is about dependable service, clear communication, and
+          understanding what your project needs.
         </p>
         <p>
-          Based in Arkansas, we work to make logistics simpler for the
-          people and businesses that depend on getting the job done.
+          Crocodile Logistics, LLLC provides trucking, hauling, and
+          construction logistics support in Arkansas. Our focus is to
+          help customers move projects forward with practical,
+          professional service.
         </p>
-        <a href="#services" className="cl-text-link">
-          EXPLORE OUR SERVICES <span>↗</span>
-        </a>
+        <Link to="/about" className="cl-text-link">
+          GET TO KNOW US <span>↗</span>
+        </Link>
+
         <div className="cl-signature">
           <div className="cl-signature-line" />
-          <div><strong>James Reddick</strong><span>OWNER · CROCODILE LOGISTICS, LLLC</span></div>
+          <div>
+            <strong>James Reddick</strong>
+            <span>OWNER · CROCODILE LOGISTICS, LLLC</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section className="cl-section cl-services" id="services">
+  <section className="cl-section cl-services">
     <div className="cl-container">
       <div className="cl-section-heading">
         <div>
-          <div className="cl-eyebrow"><span className="cl-eyebrow-line" /> WHAT WE DO</div>
-          <h2>LOGISTICS THAT<br />GETS <span className="cl-lime">IT DONE.</span></h2>
+          <div className="cl-eyebrow">
+            <span className="cl-eyebrow-line" />
+            WHAT WE DO
+          </div>
+          <h2>
+            BUILT FOR THE
+            <br />
+            <span className="cl-lime">HEAVY LIFT.</span>
+          </h2>
         </div>
         <p>
-          Straightforward solutions for transportation, hauling, and
-          construction logistics. Tell us what you need and let’s discuss
-          how we can help.
+          Practical logistics services designed around your operation,
+          your project, and the work that needs to get done.
         </p>
       </div>
 
       <div className="cl-service-grid">
-        {services.map((service) => (
-          <article className="cl-service-card" key={service.number}>
-            <div className="cl-service-card-top">
-              <span>{service.number} / SERVICE</span>
-              <span className="cl-service-icon">{service.icon}</span>
+        <article className="cl-service-card">
+          <div className="cl-service-card-top">
+            <span>SERVICE 01</span>
+            <span className="cl-service-icon">↗</span>
+          </div>
+          <div className="cl-service-visual">
+            <div className="cl-service-art">
+              TRUCKING <span>01</span>
             </div>
-            <div className="cl-service-visual">
-              {service.number === "01" && <div className="cl-service-art cl-truck-art">ROAD<br />READY<span>↗</span></div>}
-              {service.number === "02" && <div className="cl-service-art cl-haul-art">BUILT<br />TO MOVE<span>↗</span></div>}
-              {service.number === "03" && <div className="cl-service-art cl-build-art">PROJECT<br />SUPPORT<span>↗</span></div>}
+          </div>
+          <h3>TRUCKING SERVICES</h3>
+          <p>
+            Dependable trucking support for business and project
+            transportation needs.
+          </p>
+          <Link to="/services" className="cl-card-link">
+            EXPLORE SERVICE <span>↗</span>
+          </Link>
+        </article>
+
+        <article className="cl-service-card">
+          <div className="cl-service-card-top">
+            <span>SERVICE 02</span>
+            <span className="cl-service-icon">↗</span>
+          </div>
+          <div className="cl-service-visual">
+            <div className="cl-service-art">
+              HAULING <span>02</span>
             </div>
-            <h3>{service.title}</h3>
-            <p>{service.description}</p>
-            <a href="#contact" className="cl-card-link">LET'S TALK <span>↗</span></a>
-          </article>
-        ))}
+          </div>
+          <h3>HAULING SERVICES</h3>
+          <p>
+            Hauling support focused on your requirements, site
+            conditions, and project schedule.
+          </p>
+          <Link to="/services" className="cl-card-link">
+            EXPLORE SERVICE <span>↗</span>
+          </Link>
+        </article>
+
+        <article className="cl-service-card">
+          <div className="cl-service-card-top">
+            <span>SERVICE 03</span>
+            <span className="cl-service-icon">↗</span>
+          </div>
+          <div className="cl-service-visual">
+            <div className="cl-service-art">
+              CONSTRUCTION <span>03</span>
+            </div>
+          </div>
+          <h3>CONSTRUCTION LOGISTICS</h3>
+          <p>
+            Logistics support to help construction projects coordinate
+            material movement and transportation needs.
+          </p>
+          <Link to="/services" className="cl-card-link">
+            EXPLORE SERVICE <span>↗</span>
+          </Link>
+        </article>
       </div>
+
       <p className="cl-services-note">
-        Need something specific? <a href="#contact">Contact our team</a> to discuss your requirements.
+        Have a specific requirement?{" "}
+        <Link to="/contact">Talk to our team about your project.</Link>
       </p>
     </div>
   </section>
@@ -237,125 +279,187 @@ return (
     <div className="cl-statement-image" />
     <div className="cl-statement-overlay" />
     <div className="cl-container cl-statement-content">
-      <div className="cl-eyebrow"><span className="cl-eyebrow-line" /> OUR COMMITMENT</div>
-      <h2>WHEN THE JOB<br />MATTERS, <span className="cl-lime">MOVE</span><br />WITH PURPOSE.</h2>
+      <div className="cl-eyebrow">
+        <span className="cl-eyebrow-line" />
+        YOUR PROJECT. OUR FOCUS.
+      </div>
+      <h2>
+        THE WORK
+        <br />
+        DOESN'T
+        <br />
+        <span className="cl-lime">MOVE ITSELF.</span>
+      </h2>
       <p>
-        Clear communication. Dependable support. A practical approach
-        to keeping your operation moving forward.
+        When your project needs trucking, hauling, or logistics support,
+        start with a conversation about what needs to move.
       </p>
-      <a href="#contact" className="cl-button cl-button-lime">LET'S GET TO WORK <span>↗</span></a>
+      <Link to="/contact" className="cl-button cl-button-lime">
+        LET'S TALK LOGISTICS <span>↗</span>
+      </Link>
     </div>
   </section>
 
-  <section className="cl-section cl-process" id="process">
+  <section className="cl-section cl-process">
     <div className="cl-container">
-      <div className="cl-eyebrow"><span className="cl-eyebrow-line" /> A STRAIGHTFORWARD APPROACH</div>
-      <div className="cl-section-heading cl-process-heading">
-        <h2>FROM FIRST CALL<br />TO <span className="cl-lime">DONE.</span></h2>
-        <p>No unnecessary complexity. Just a clear conversation about your needs and the next steps.</p>
+      <div className="cl-eyebrow">
+        <span className="cl-eyebrow-line" />
+        A STRAIGHTFORWARD APPROACH
       </div>
+      <div className="cl-process-heading">
+        <h2>
+          SIMPLE STEPS.
+          <br />
+          <span className="cl-lime">CLEAR DIRECTION.</span>
+        </h2>
+      </div>
+
       <div className="cl-process-grid">
-        <div className="cl-process-item"><span>01</span><div><h3>LET'S TALK</h3><p>Tell us about your load, timeline, location, or project requirements.</p></div></div>
-        <div className="cl-process-item"><span>02</span><div><h3>PLAN THE DETAILS</h3><p>We’ll discuss the service you need and the details to move forward.</p></div></div>
-        <div className="cl-process-item"><span>03</span><div><h3>GET MOVING</h3><p>Once details are confirmed, we’ll work toward the next step together.</p></div></div>
+        <article className="cl-process-item">
+          <span>01</span>
+          <div>
+            <h3>LET'S TALK</h3>
+            <p>
+              Tell us about your project, location, and the type of
+              support you are looking for.
+            </p>
+          </div>
+        </article>
+        <article className="cl-process-item">
+          <span>02</span>
+          <div>
+            <h3>DISCUSS THE PLAN</h3>
+            <p>
+              We discuss your requirements and the next steps for your
+              trucking or hauling request.
+            </p>
+          </div>
+        </article>
+        <article className="cl-process-item">
+          <span>03</span>
+          <div>
+            <h3>MOVE FORWARD</h3>
+            <p>
+              Once the details are agreed, move ahead with a clear
+              understanding of the planned service.
+            </p>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <section className="cl-contact" id="contact">
+  <section className="cl-contact">
     <div className="cl-container cl-contact-grid">
       <div className="cl-contact-copy">
-        <div className="cl-eyebrow"><span className="cl-eyebrow-line" /> GET IN TOUCH</div>
-        <h2>LET'S MOVE<br />SOMETHING <span className="cl-lime">FORWARD.</span></h2>
+        <div className="cl-eyebrow">
+          <span className="cl-eyebrow-line" />
+          LET'S GET TO WORK
+        </div>
+        <h2>
+          HAVE A
+          <br />
+          PROJECT?
+          <br />
+          <span className="cl-lime">LET'S TALK.</span>
+        </h2>
         <p>
-          Have a trucking, hauling, or construction logistics requirement?
-          Reach out to discuss your project and how we may be able to help.
+          Tell us what you need moved, hauled, or coordinated. Contact
+          Crocodile Logistics to discuss your project and next steps.
         </p>
-        <a href={PHONE_LINK} className="cl-contact-phone">
-          <span className="cl-contact-phone-icon">↗</span>
-          <span><small>CALL US DIRECTLY</small><strong>{PHONE}</strong></span>
+
+        <a className="cl-contact-phone" href={`tel:${PHONE}`}>
+          <span className="cl-contact-phone-icon">☎</span>
+          <span>
+            <small>CALL OUR TEAM</small>
+            <strong>501-351-3623</strong>
+          </span>
         </a>
+
         <div className="cl-contact-detail">
-          <span>⌖</span><div><strong>LOCATION</strong><p>Arkansas, United States</p></div>
+          <span>⌖</span>
+          <div>
+            <strong>LOCATION</strong>
+            <p>Arkansas, USA</p>
+          </div>
         </div>
         <div className="cl-contact-detail">
-          <span>◷</span><div><strong>BUSINESS HOURS</strong><p>Monday – Saturday: 8:00 AM – 5:00 PM<br />Sunday: Closed</p></div>
+          <span>◷</span>
+          <div>
+            <strong>BUSINESS HOURS</strong>
+            <p>Monday–Saturday: 8:00 AM–5:00 PM<br />Sunday: Closed</p>
+          </div>
         </div>
       </div>
 
-      <form className="cl-contact-form" onSubmit={submitRequest}>
-        <div className="cl-form-heading"><span>01 / YOUR PROJECT</span><span>LET'S CONNECT ↗</span></div>
-        <label>
-          YOUR NAME *
-          <input
-            required
-            value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
-            placeholder="Enter your name"
-          />
-        </label>
-        <label>
-          PHONE NUMBER *
-          <input
-            required
-            type="tel"
-            value={form.phone}
-            onChange={(e) => setForm({ ...form, phone: e.target.value })}
-            placeholder="Best number to reach you"
-          />
-        </label>
-        <label>
-          SERVICE NEEDED
-          <select
-            value={form.service}
-            onChange={(e) => setForm({ ...form, service: e.target.value })}
-          >
-            <option>Trucking</option>
-            <option>Hauling</option>
-            <option>Construction Logistics</option>
-            <option>General Inquiry</option>
-          </select>
-        </label>
-        <label>
-          PROJECT DETAILS
-          <textarea
-            rows={4}
-            value={form.message}
-            onChange={(e) => setForm({ ...form, message: e.target.value })}
-            placeholder="Tell us a little about what you need..."
-          />
-        </label>
-        <button className="cl-button cl-button-lime cl-submit" type="submit">
-          SEND REQUEST BY TEXT <span>↗</span>
-        </button>
-        <p className="cl-form-note">This opens your messaging app with your request pre-filled.</p>
-      </form>
+      <div className="cl-contact-form">
+        <div className="cl-form-heading">
+          <span>GET IN TOUCH</span>
+          <span>INQUIRY · 01</span>
+        </div>
+        <p>
+          Ready to discuss your logistics needs? Send us a message
+          and tell us how we can help.
+        </p>
+        <Link to="/contact" className="cl-button cl-button-lime">
+          CONTACT OUR TEAM <span>↗</span>
+        </Link>
+        <p style={{ marginTop: 20, color: "#a4a79d", fontSize: 12 }}>
+          For direct assistance, call{" "}
+          <a href={`tel:${PHONE}`} style={{ color: "#c4f04d" }}>
+            501-351-3623
+          </a>
+          .
+        </p>
+      </div>
     </div>
   </section>
 
   <footer className="cl-footer">
-    <div className="cl-container">
-      <div className="cl-footer-main">
-        <a href="#home" className="cl-brand cl-footer-brand">
-          <span className="cl-logo-mark" aria-hidden="true">
-            <svg viewBox="0 0 64 64" fill="none">
-              <path d="M8 22 24 8h25l7 9-9 8H28l-8 9H8l7-8-7-4Z" fill="currentColor" />
-              <path d="m13 40 10-8h24l8 7-8 8H27l-8 8H8l7-8-2-7Z" fill="currentColor" opacity=".65" />
+    <div className="cl-container cl-footer-main">
+      <div className="cl-footer-brand">
+        <Link to="/" className="cl-brand">
+          <span className="cl-logo-mark">
+            <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <path d="M8 9H40V17H18V23H36V31H18V39H8V9Z" fill="currentColor" />
             </svg>
           </span>
-          <span className="cl-brand-copy"><strong>CROCODILE</strong><small>LOGISTICS, LLLC</small></span>
-        </a>
-        <p>RELIABLE SERVICE.<br />REAL-WORLD SOLUTIONS.</p>
-        <a href={PHONE_LINK} className="cl-footer-call">{PHONE} ↗</a>
+          <span className="cl-brand-copy">
+            <strong>CROCODILE</strong>
+            <small>LOGISTICS, LLLC</small>
+          </span>
+        </Link>
+        <p>
+          Trucking, hauling, and construction logistics support in
+          Arkansas. Professional service focused on moving your
+          project forward.
+        </p>
       </div>
-      <div className="cl-footer-bottom">
-        <span>© {new Date().getFullYear()} Crocodile Logistics, LLLC. All rights reserved.</span>
-        <span>ARKANSAS, UNITED STATES</span>
-        <a href="#home">BACK TO TOP ↑</a>
+
+      <div className="cl-footer-links">
+        <strong>EXPLORE</strong>
+        <Link to="/">Home</Link>
+        <Link to="/about">About Us</Link>
+        <Link to="/services">Services</Link>
+        <Link to="/industries">Industries</Link>
+        <Link to="/contact">Contact</Link>
       </div>
+
+      <div className="cl-footer-links">
+        <strong>CONTACT</strong>
+        <a href={`tel:${PHONE}`}>501-351-3623</a>
+        <span>Arkansas, USA</span>
+        <span>Mon–Sat · 8 AM–5 PM</span>
+        <span>Sunday · Closed</span>
+      </div>
+    </div>
+
+    <div className="cl-container cl-footer-bottom">
+      <span>© {new Date().getFullYear()} Crocodile Logistics, LLLC.</span>
+      <span>DEPENDABLE BY DESIGN.</span>
     </div>
   </footer>
 </main>
 
 );
-    }
+  }

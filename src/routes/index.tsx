@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 
 export const Route = createFileRoute("/")({
@@ -102,11 +102,12 @@ return (
       </button>
 
       <nav className={`cl-links ${menuOpen ? "cl-links-open" : ""}`}>
-        <a href="#about" onClick={() => setMenuOpen(false)}>ABOUT</a>
-        <a href="#services" onClick={() => setMenuOpen(false)}>SERVICES</a>
-        <a href="#process" onClick={() => setMenuOpen(false)}>OUR APPROACH</a>
-        <a href="#contact" onClick={() => setMenuOpen(false)}>CONTACT</a>
-        <a className="cl-nav-call" href={PHONE_LINK}>
+        
+<Link to="/about" onClick={() => setMenuOpen(false)}>ABOUT US</Link>
+<Link to="/services" onClick={() => setMenuOpen(false)}>SERVICES</Link>
+<Link to="/industries" onClick={() => setMenuOpen(false)}>INDUSTRIES</Link>
+<Link to="/contact" onClick={() => setMenuOpen(false)}>CONTACT</Link>
+        
           CALL NOW <span>↗</span>
         </a>
       </nav>

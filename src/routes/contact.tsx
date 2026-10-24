@@ -1,256 +1,243 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 
-const PHONE = "501-351-3623";
-const PHONE_LINK = "+15013513623";
-
 export const Route = createFileRoute("/contact")({
-head: () => ({
-meta: [
-{ title: "Contact Us | Crocodile Logistics, LLLC" },
-{
-name: "description",
-content:
-"Contact Crocodile Logistics, LLLC for trucking, hauling, and construction logistics support in Arkansas.",
-},
-],
-}),
 component: ContactPage,
 });
 
 function ContactPage() {
-const [name, setName] = useState("");
-const [phone, setPhone] = useState("");
-const [service, setService] = useState("Trucking");
-const [message, setMessage] = useState("");
+const [submitted, setSubmitted] = useState(false);
 
 function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 event.preventDefault();
 
-const text = [
-  "Hello Crocodile Logistics, LLLC!",
-  "",
-  `Name: ${name}`,
-  `Phone: ${phone}`,
-  `Service: ${service}`,
-  `Message: ${message || "I'd like more information."}`,
-].join("\n");
+const form = event.currentTarget;
+const formData = new FormData(form);
 
-window.location.href = `sms:${PHONE_LINK}?body=${encodeURIComponent(text)}`;
+const name = String(formData.get("name") || "");
+const email = String(formData.get("email") || "");
+const phone = String(formData.get("phone") || "");
+const service = String(formData.get("service") || "");
+const details = String(formData.get("details") || "");
+
+const subject = encodeURIComponent(
+  `Website Inquiry - ${service || "Logistics Services"}`
+);
+
+const body = encodeURIComponent(
+  `Hello Crocodile Logistics,\n\n` +
+    `Name: ${name}\n` +
+    `Email: ${email}\n` +
+    `Phone: ${phone}\n` +
+    `Service Needed: ${service}\n\n` +
+    `Project Details:\n${details}\n\n` +
+    `Sent through the website contact form.`
+);
+
+setSubmitted(true);
+
+window.location.href =
+  `mailto:info@crocodilelogistics.com?subject=${subject}&body=${body}`;
 
 }
 
 return (
 <main className="cl-page">
-<header className="cl-header">
-<div className="cl-header-inner">
-<Link to="/" className="cl-brand">
-<span className="cl-brand-mark">C</span>
-<span className="cl-brand-text">
-<strong>CROCODILE</strong>
-<small>LOGISTICS, LLLC</small>
-</span>
-</Link>
+<section className="cl-page-hero">
+<div className="cl-container">
+<span className="cl-eyebrow">CONTACT CROCODILE LOGISTICS</span>
 
-      <nav className="cl-nav">
-        <Link to="/">Home</Link>
-        <Link to="/about">About Us</Link>
-        <Link to="/services">Services</Link>
-        <Link to="/industries">Industries</Link>
-        <Link to="/contact" className="cl-nav-cta">
-          Contact
-        </Link>
-      </nav>
-
-      <a className="cl-header-phone" href={`tel:${PHONE_LINK}`}>
-        Call {PHONE}
-      </a>
-    </div>
-  </header>
-
-  <section className="cl-page-hero">
-    <div className="cl-container">
-      <span className="cl-eyebrow">LET'S GET MOVING</span>
       <h1>
-        Let's Talk <span>Logistics.</span>
+        LET'S GET
+        <br />
+        <span>YOUR LOAD MOVING.</span>
       </h1>
+
       <p>
-        Have a hauling request, a trucking project, or a logistics question?
-        Get in touch with our team to discuss what you need.
+        Have a transportation, hauling, or construction logistics
+        requirement? Tell us about your project. Our team is ready
+        to discuss your needs and possible next steps.
       </p>
-      <div className="cl-hero-actions">
-        <a className="cl-btn cl-btn-primary" href={`tel:${PHONE_LINK}`}>
-          Call {PHONE}
+
+      <div className="cl-hero-actions" style={{ marginTop: 30 }}>
+        <a href="tel:5013513623" className="cl-button cl-button-primary">
+          CALL 501-351-3623
         </a>
-        <a className="cl-btn cl-btn-outline" href="#contact-form">
-          Send an Inquiry
+
+        <a
+          href="sms:5013513623"
+          className="cl-button cl-button-outline"
+        >
+          SEND A TEXT
         </a>
       </div>
     </div>
   </section>
 
-  <section className="cl-section">
+  <section className="cl-page-content">
     <div className="cl-container cl-contact-layout">
-      <div className="cl-contact-info">
-        <span className="cl-eyebrow">CONTACT INFORMATION</span>
-        <h2>Reliable service starts with a conversation.</h2>
-        <p>
-          Tell us about your project and the service you need. We'll be
-          ready to discuss the next steps with you.
-        </p>
+      <div>
+        <span className="cl-eyebrow">GET IN TOUCH</span>
 
-        <div className="cl-contact-detail">
-          <span className="cl-contact-icon">☎</span>
-          <div>
-            <strong>Phone</strong>
-            <a href={`tel:${PHONE_LINK}`}>{PHONE}</a>
-          </div>
+        <div className="cl-page-copy">
+          <h2>
+            LET'S TALK
+            <br />
+            BUSINESS.
+          </h2>
+
+          <p>
+            Share a few details about what you need. You can call
+            directly or use the inquiry form to prepare an email
+            with your project information.
+          </p>
         </div>
 
-        <div className="cl-contact-detail">
-          <span className="cl-contact-icon">⌖</span>
-          <div>
-            <strong>Service Area</strong>
-            <span>Arkansas, USA</span>
+        <div className="cl-contact-details">
+          <div className="cl-contact-detail">
+            <span>Phone</span>
+            <h3>Call Our Team</h3>
+            <a href="tel:5013513623">501-351-3623</a>
           </div>
-        </div>
 
-        <div className="cl-contact-detail">
-          <span className="cl-contact-icon">◷</span>
-          <div>
-            <strong>Business Hours</strong>
-            <span>Monday–Saturday: 8:00 AM–5:00 PM</span>
-            <span>Sunday: Closed</span>
+          <div className="cl-contact-detail">
+            <span>Location</span>
+            <h3>Arkansas, USA</h3>
+            <p>
+              Serving transportation and logistics inquiries.
+              Contact us to discuss your project location.
+            </p>
+          </div>
+
+          <div className="cl-contact-detail">
+            <span>Business Hours</span>
+            <h3>Monday – Saturday</h3>
+            <p>8:00 AM – 5:00 PM</p>
+            <p>Sunday: Closed</p>
           </div>
         </div>
 
         <div className="cl-contact-note">
-          <strong>Need to speak with us directly?</strong>
-          <p>Call during business hours to discuss your logistics needs.</p>
-          <a href={`tel:${PHONE_LINK}`}>Call our team →</a>
+          <h3>Have an urgent inquiry?</h3>
+          <p>
+            Call us at{" "}
+            <a href="tel:5013513623">501-351-3623</a> to discuss
+            your transportation or hauling requirements.
+          </p>
         </div>
       </div>
 
-      <div className="cl-contact-form-wrap" id="contact-form">
-        <span className="cl-eyebrow">SEND AN INQUIRY</span>
-        <h2>Tell us about your project.</h2>
+      <div className="cl-contact-form-wrap">
+        <h2>REQUEST INFORMATION</h2>
+
         <p>
-          Complete the form below to prepare a message on your phone.
+          Complete the form to prepare an inquiry email with your
+          contact details and project requirements.
         </p>
 
         <form className="cl-contact-form" onSubmit={handleSubmit}>
-          <label htmlFor="contact-name">Full Name *</label>
-          <input
-            id="contact-name"
-            name="name"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-            placeholder="Your full name"
-            autoComplete="name"
-            required
-          />
+          <label>
+            Full Name *
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter your full name"
+              autoComplete="name"
+              required
+            />
+          </label>
 
-          <label htmlFor="contact-phone">Phone Number *</label>
-          <input
-            id="contact-phone"
-            name="phone"
-            type="tel"
-            value={phone}
-            onChange={(event) => setPhone(event.target.value)}
-            placeholder="Your best contact number"
-            autoComplete="tel"
-            required
-          />
+          <label>
+            Email Address *
+            <input
+              type="email"
+              name="email"
+              placeholder="you@company.com"
+              autoComplete="email"
+              required
+            />
+          </label>
 
-          <label htmlFor="contact-service">Service Needed *</label>
-          <select
-            id="contact-service"
-            name="service"
-            value={service}
-            onChange={(event) => setService(event.target.value)}
-            required
-          >
-            <option value="Trucking">Trucking</option>
-            <option value="Hauling">Hauling</option>
-            <option value="Construction Logistics Support">
-              Construction Logistics Support
-            </option>
-            <option value="General Inquiry">General Inquiry</option>
-          </select>
+          <label>
+            Phone Number
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Your contact number"
+              autoComplete="tel"
+            />
+          </label>
 
-          <label htmlFor="contact-message">Project Details</label>
-          <textarea
-            id="contact-message"
-            name="message"
-            value={message}
-            onChange={(event) => setMessage(event.target.value)}
-            placeholder="Tell us about your project, location, or requirements..."
-            rows={5}
-          />
+          <label>
+            Service Needed *
+            <select name="service" defaultValue="" required>
+              <option value="" disabled>
+                Select a service
+              </option>
+              <option value="Trucking Services">
+                Trucking Services
+              </option>
+              <option value="Hauling Solutions">
+                Hauling Solutions
+              </option>
+              <option value="Construction Logistics">
+                Construction Logistics
+              </option>
+              <option value="Freight Transportation">
+                Freight Transportation
+              </option>
+              <option value="Other Inquiry">
+                Other Inquiry
+              </option>
+            </select>
+          </label>
 
-          <button className="cl-btn cl-btn-primary" type="submit">
-            Prepare Message →
+          <label>
+            Project Details *
+            <textarea
+              name="details"
+              placeholder="Tell us about your load, locations, schedule, and requirements..."
+              required
+            />
+          </label>
+
+          <button type="submit">
+            PREPARE INQUIRY EMAIL ↗
           </button>
 
+          {submitted && (
+            <p role="status">
+              Your email application should open now. If it doesn't,
+              call 501-351-3623 directly.
+            </p>
+          )}
+
           <small>
-            This form opens your phone's messaging app with your details
-            filled in. Review and send the message to complete your inquiry.
+            This form opens your device's email application. It does
+            not send or store information directly on this website.
           </small>
         </form>
       </div>
     </div>
   </section>
 
-  <section className="cl-statement">
-    <div className="cl-container cl-statement-inner">
+  <section className="cl-final-cta">
+    <div className="cl-container cl-final-cta-inner">
       <div>
         <span className="cl-eyebrow">CROCODILE LOGISTICS, LLLC</span>
-        <h2>Let's move your project forward.</h2>
+
+        <h2>
+          READY TO MOVE
+          <br />
+          <span>FORWARD?</span>
+        </h2>
       </div>
-      <a className="cl-btn cl-btn-primary" href={`tel:${PHONE_LINK}`}>
-        Call Us Today
-      </a>
+
+      <Link to="/services" className="cl-button cl-button-primary">
+        EXPLORE SERVICES
+      </Link>
     </div>
   </section>
-
-  <footer className="cl-footer">
-    <div className="cl-container cl-footer-main">
-      <div className="cl-footer-brand">
-        <Link to="/" className="cl-brand">
-          <span className="cl-brand-mark">C</span>
-          <span className="cl-brand-text">
-            <strong>CROCODILE</strong>
-            <small>LOGISTICS, LLLC</small>
-          </span>
-        </Link>
-        <p>
-          Dependable trucking, hauling, and construction logistics support
-          across Arkansas.
-        </p>
-      </div>
-
-      <div className="cl-footer-links">
-        <strong>Explore</strong>
-        <Link to="/">Home</Link>
-        <Link to="/about">About Us</Link>
-        <Link to="/services">Services</Link>
-        <Link to="/industries">Industries</Link>
-        <Link to="/contact">Contact</Link>
-      </div>
-
-      <div className="cl-footer-links">
-        <strong>Get in Touch</strong>
-        <a href={`tel:${PHONE_LINK}`}>{PHONE}</a>
-        <span>Arkansas, USA</span>
-        <span>Mon–Sat · 8 AM–5 PM</span>
-      </div>
-    </div>
-
-    <div className="cl-container cl-footer-bottom">
-      <span>© {new Date().getFullYear()} Crocodile Logistics, LLLC.</span>
-      <span>Built for dependable logistics.</span>
-    </div>
-  </footer>
 </main>
 
 );

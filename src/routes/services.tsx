@@ -1,3 +1,4 @@
+import { Header } from "../components/Header";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/services")({
@@ -6,7 +7,9 @@ component: ServicesPage,
 
 function ServicesPage() {
 return (
-<main className="cl-page">
+  <>
+    <Header />
+    <main className="cl-page">
 <section className="cl-page-hero">
 <div className="cl-container">
 <span className="cl-eyebrow">WHAT WE DO</span>
@@ -153,7 +156,7 @@ return (
       </Link>
     </div>
   </section>
-</main>
-
-);
+    </main>
+  </>
+  );
 }

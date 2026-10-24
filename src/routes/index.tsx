@@ -107,7 +107,7 @@ return (
 <Link to="/services" onClick={() => setMenuOpen(false)}>SERVICES</Link>
 <Link to="/industries" onClick={() => setMenuOpen(false)}>INDUSTRIES</Link>
 <Link to="/contact" onClick={() => setMenuOpen(false)}>CONTACT</Link>
-        
+        <a className="cl-nav-call" href={PHONE_LINK}>
           CALL NOW <span>↗</span>
         </a>
       </nav>

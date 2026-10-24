@@ -1,306 +1,188 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/industries")({
-head: () => ({
-meta: [
-{ title: "Industries | Crocodile Logistics, LLLC" },
-{
-name: "description",
-content:
-"Explore trucking, hauling, and construction logistics support for business and project requirements in Arkansas.",
-},
-],
-}),
 component: IndustriesPage,
 });
 
-const PHONE = "501-351-3623";
-const PHONE_LINK = "tel:+15013513623";
-
-const industries = [
-{
-number: "01",
-title: "Construction",
-tag: "PROJECT LOGISTICS",
-icon: "⌁",
-description:
-"Transportation and hauling support for construction-related projects, based on site needs, materials, locations, and schedules.",
-},
-{
-number: "02",
-title: "Transportation",
-tag: "TRUCKING SUPPORT",
-icon: "↗",
-description:
-"Trucking support for businesses looking to discuss load requirements, destinations, timing, and transportation coordination.",
-},
-{
-number: "03",
-title: "Material Movement",
-tag: "HAULING REQUIREMENTS",
-icon: "⇢",
-description:
-"Practical conversations about moving materials, planning pickup and delivery details, and understanding project requirements.",
-},
-{
-number: "04",
-title: "Business Operations",
-tag: "LOGISTICS COORDINATION",
-icon: "＋",
-description:
-"Logistics discussions for businesses that need transportation or hauling support to help organize their day-to-day operations.",
-},
-];
-
 function IndustriesPage() {
 return (
-<main className="cl-site">
-<div className="cl-topbar">
-<div className="cl-container cl-topbar-inner">
-<span>RELIABLE SERVICE. REAL-WORLD SOLUTIONS.</span>
-<span>ARKANSAS · UNITED STATES</span>
-</div>
-</div>
-
-  <header className="cl-header">
-    <div className="cl-container cl-nav">
-      <Link to="/" className="cl-brand" aria-label="Crocodile Logistics home">
-        <span className="cl-logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 64 64" fill="none">
-            <path
-              d="M8 22 24 8h25l7 9-9 8H28l-8 9H8l7-8-7-4Z"
-              fill="currentColor"
-            />
-            <path
-              d="m13 40 10-8h24l8 7-8 8H27l-8 8H8l7-8-2-7Z"
-              fill="currentColor"
-              opacity=".65"
-            />
-          </svg>
-        </span>
-        <span className="cl-brand-copy">
-          <strong>CROCODILE</strong>
-          <small>LOGISTICS, LLLC</small>
-        </span>
-      </Link>
-
-      <nav className="cl-links">
-        <Link to="/">HOME</Link>
-        <Link to="/about">ABOUT US</Link>
-        <Link to="/services">SERVICES</Link>
-        <Link to="/industries" className="cl-lime">INDUSTRIES</Link>
-        <Link to="/contact">CONTACT</Link>
-        <a className="cl-nav-call" href={PHONE_LINK}>
-          CALL NOW <span>↗</span>
-        </a>
-      </nav>
-    </div>
-  </header>
-
-  <section className="cl-hero">
-    <div className="cl-hero-image" />
-    <div className="cl-hero-shade" />
-    <div className="cl-container cl-hero-content">
-      <div className="cl-eyebrow cl-hero-eyebrow">
-        <span className="cl-eyebrow-line" />
-        INDUSTRIES · ARKANSAS
-      </div>
+<main className="cl-page">
+<section className="cl-page-hero">
+<div className="cl-container">
+<span className="cl-eyebrow">INDUSTRIES WE SUPPORT</span>
 
       <h1>
-        SUPPORTING
+        BUILT FOR THE
         <br />
-        THE WORK
-        <br />
-        THAT <span className="cl-lime">MOVES</span>
-        <br />
-        <span className="cl-outline-text">BUSINESS.</span>
+        <span>WORK THAT MOVES US.</span>
       </h1>
 
-      <p className="cl-hero-description">
-        Different projects bring different challenges. We discuss your
-        transportation, hauling, and logistics requirements to understand
-        what support may be appropriate.
+      <p>
+        From construction projects to commercial operations, Crocodile
+        Logistics works with customers to discuss transportation,
+        hauling, and logistics support suited to their needs.
       </p>
 
-      <div className="cl-hero-actions">
-        <Link to="/contact" className="cl-button cl-button-lime">
-          DISCUSS YOUR NEEDS <span>↗</span>
+      <div className="cl-hero-actions" style={{ marginTop: 30 }}>
+        <Link to="/contact" className="cl-button cl-button-primary">
+          DISCUSS YOUR NEEDS
         </Link>
-        <a href={PHONE_LINK} className="cl-button cl-button-outline">
-          CALL {PHONE}
-        </a>
+
+        <Link to="/services" className="cl-button cl-button-outline">
+          VIEW OUR SERVICES
+        </Link>
       </div>
     </div>
   </section>
 
-  <section className="cl-section cl-services">
+  <section className="cl-page-content">
     <div className="cl-container">
       <div className="cl-section-heading">
         <div>
-          <div className="cl-eyebrow">
-            <span className="cl-eyebrow-line" />
-            WHO WE SUPPORT
-          </div>
+          <span className="cl-eyebrow">OUR INDUSTRY FOCUS</span>
           <h2>
             LOGISTICS FOR
             <br />
-            REAL-WORLD <span className="cl-lime">WORK.</span>
+            <span>REAL-WORLD WORK.</span>
           </h2>
         </div>
+
         <p>
-          We focus on understanding the requirements of each request.
-          Contact us to discuss your industry, load, location, and project
-          needs.
+          Every industry has its own schedules, materials, and
+          operational demands. We start by understanding your
+          requirements and discussing the right way forward.
         </p>
       </div>
 
-      <div className="cl-service-grid">
-        {industries.map((industry) => (
-          <article className="cl-service-card" key={industry.number}>
-            <div className="cl-service-card-top">
-              <span>{industry.number} / INDUSTRY</span>
-              <span className="cl-service-icon">{industry.icon}</span>
-            </div>
+      <div className="cl-page-cards">
+        <article className="cl-page-card">
+          <span className="cl-card-number">01 / BUILD</span>
 
-            <div className="cl-service-visual">
-              <div
-                className={`cl-service-art ${
-                  industry.number === "01"
-                    ? "cl-build-art"
-                    : industry.number === "02"
-                      ? "cl-truck-art"
-                      : industry.number === "03"
-                        ? "cl-haul-art"
-                        : "cl-build-art"
-                }`}
-              >
-                {industry.title.toUpperCase()}
-                <span>{industry.icon}</span>
-              </div>
-            </div>
+          <h3>CONSTRUCTION</h3>
 
-            <span className="cl-service-label">{industry.tag}</span>
-            <h3>{industry.title}</h3>
-            <p>{industry.description}</p>
+          <p>
+            Transportation and logistics support for construction
+            activities, including material movement planning and
+            coordination around project requirements.
+          </p>
+        </article>
 
-            <Link to="/contact" className="cl-card-link">
-              DISCUSS YOUR PROJECT <span>↗</span>
-            </Link>
-          </article>
-        ))}
+        <article className="cl-page-card">
+          <span className="cl-card-number">02 / MOVE</span>
+
+          <h3>COMMERCIAL OPERATIONS</h3>
+
+          <p>
+            Practical transportation support for businesses that
+            need to coordinate freight, shipments, and delivery
+            requirements as part of their daily operations.
+          </p>
+        </article>
+
+        <article className="cl-page-card">
+          <span className="cl-card-number">03 / HAUL</span>
+
+          <h3>MATERIALS & HAULING</h3>
+
+          <p>
+            Hauling inquiries for suitable materials and project
+            needs. Share the material type, load details, locations,
+            and timing so we can review your requirements.
+          </p>
+        </article>
+
+        <article className="cl-page-card">
+          <span className="cl-card-number">04 / PLAN</span>
+
+          <h3>PROJECT LOGISTICS</h3>
+
+          <p>
+            Coordination discussions for projects where transportation
+            timing, material movement, and clear communication are
+            important to keeping work organized.
+          </p>
+        </article>
+
+        <article className="cl-page-card">
+          <span className="cl-card-number">05 / DELIVER</span>
+
+          <h3>FREIGHT MOVEMENT</h3>
+
+          <p>
+            Tell us about your freight, pickup and delivery points,
+            scheduling requirements, and any special handling needs
+            to discuss potential transportation options.
+          </p>
+        </article>
+
+        <article className="cl-page-card">
+          <span className="cl-card-number">06 / CONNECT</span>
+
+          <h3>BUSINESS PARTNERSHIPS</h3>
+
+          <p>
+            We welcome conversations with businesses looking for
+            dependable logistics communication and a professional
+            approach to transportation planning.
+          </p>
+        </article>
       </div>
     </div>
   </section>
 
-  <section className="cl-section cl-process">
-    <div className="cl-container">
-      <div className="cl-eyebrow">
-        <span className="cl-eyebrow-line" />
-        START WITH A CONVERSATION
+  <section className="cl-section" style={{ background: "#0b0f0b" }}>
+    <div className="cl-container cl-page-grid">
+      <div>
+        <img
+          src="https://images.unsplash.com/photo-1501700493788-fa1a4fc9fe62?auto=format&fit=crop&w=1200&q=85"
+          alt="Truck on a highway supporting freight transportation"
+          loading="lazy"
+        />
       </div>
 
-      <div className="cl-section-heading cl-process-heading">
+      <div className="cl-page-copy">
+        <span className="cl-eyebrow">A PRACTICAL APPROACH</span>
+
         <h2>
-          YOUR NEEDS.
+          YOUR PROJECT.
           <br />
-          CLEAR <span className="cl-lime">NEXT STEPS.</span>
+          YOUR REQUIREMENTS.
         </h2>
-        <p>
-          Share the details with us so we can understand your request
-          and discuss the next steps.
-        </p>
-      </div>
 
-      <div className="cl-process-grid">
-        <div className="cl-process-item">
-          <span>01</span>
-          <div>
-            <h3>SHARE YOUR REQUIREMENTS</h3>
-            <p>Describe your industry, project, load, and location.</p>
-          </div>
-        </div>
-        <div className="cl-process-item">
-          <span>02</span>
-          <div>
-            <h3>REVIEW THE DETAILS</h3>
-            <p>Discuss timing and the type of support you are seeking.</p>
-          </div>
-        </div>
-        <div className="cl-process-item">
-          <span>03</span>
-          <div>
-            <h3>DISCUSS THE WAY FORWARD</h3>
-            <p>Talk through the next steps for your specific request.</p>
-          </div>
-        </div>
+        <p>
+          We know that no two projects are exactly alike. That's why
+          we encourage customers to explain their goals, schedules,
+          locations, and specific transportation needs before moving
+          forward.
+        </p>
+
+        <ul className="cl-page-list">
+          <li>Discuss the job and required service</li>
+          <li>Share the pickup, delivery, or project locations</li>
+          <li>Explain timing and material requirements</li>
+          <li>Review the available next steps with our team</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <section className="cl-statement">
-    <div className="cl-statement-image" />
-    <div className="cl-statement-overlay" />
-    <div className="cl-container cl-statement-content">
-      <div className="cl-eyebrow">
-        <span className="cl-eyebrow-line" />
-        CROCODILE LOGISTICS, LLLC
+  <section className="cl-final-cta">
+    <div className="cl-container cl-final-cta-inner">
+      <div>
+        <span className="cl-eyebrow">LET'S WORK TOGETHER</span>
+
+        <h2>
+          HAVE A PROJECT
+          <br />
+          <span>IN MIND?</span>
+        </h2>
       </div>
-      <h2>
-        LET'S TALK
-        <br />
-        ABOUT WHAT
-        <br />
-        <span className="cl-lime">YOU NEED.</span>
-      </h2>
-      <p>
-        Contact us to discuss trucking, hauling, or construction
-        logistics support in Arkansas.
-      </p>
-      <Link to="/contact" className="cl-button cl-button-lime">
-        CONTACT OUR TEAM <span>↗</span>
+
+      <Link to="/contact" className="cl-button cl-button-primary">
+        CONTACT OUR TEAM
       </Link>
     </div>
   </section>
-
-  <footer className="cl-footer">
-    <div className="cl-container">
-      <div className="cl-footer-main">
-        <Link to="/" className="cl-brand cl-footer-brand">
-          <span className="cl-logo-mark" aria-hidden="true">
-            <svg viewBox="0 0 64 64" fill="none">
-              <path
-                d="M8 22 24 8h25l7 9-9 8H28l-8 9H8l7-8-7-4Z"
-                fill="currentColor"
-              />
-              <path
-                d="m13 40 10-8h24l8 7-8 8H27l-8 8H8l7-8-2-7Z"
-                fill="currentColor"
-                opacity=".65"
-              />
-            </svg>
-          </span>
-          <span className="cl-brand-copy">
-            <strong>CROCODILE</strong>
-            <small>LOGISTICS, LLLC</small>
-          </span>
-        </Link>
-
-        <p>RELIABLE SERVICE.<br />REAL-WORLD SOLUTIONS.</p>
-        <a href={PHONE_LINK} className="cl-footer-call">
-          {PHONE} ↗
-        </a>
-      </div>
-
-      <div className="cl-footer-bottom">
-        <span>
-          © {new Date().getFullYear()} Crocodile Logistics, LLLC.
-          All rights reserved.
-        </span>
-        <span>ARKANSAS, UNITED STATES</span>
-        <Link to="/">BACK HOME ↑</Link>
-      </div>
-    </div>
-  </footer>
 </main>
 
 );
